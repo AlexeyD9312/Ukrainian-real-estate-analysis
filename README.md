@@ -124,13 +124,29 @@ params = {
 
 Ми отримуємо 4 основні таблиці location, financial_information, phisikal_characteristics, realty_url_information. Ці таблиці мають однакові ключі та кількість рядків. По суті це одна таблиця, розділена на логічні складові: локація, фінансова інформація, фізичні характеристики, характеристики оголошення.
 Таке розділення дало кращу читабельність, але виросла кількість зв'язків, що ускладнило процесс виконання запитів. Інші таблиці використовуються для зберігання довідкової інформації, яка зв'язана з основними таблицями по зовнішнім ключам.
-Тож створюємо view, вказуючи потрібні нам характеристики(місто,район,ціни,площу,перегляди...)
+Тож створюємо view, вказуючи потрібні нам характеристики(місто,район,ціни,площу,перегляди...) , та відсіюємо об'яви які є дублюючими. Це майже 40% від всієї кількості об'яв.
 
 ```sql
+create view price_and_square_last as 
+     select f.realty_id as realty_id,rt.realty_type as realty_type, adn.admin_district_name as district_name, f.total_price_USD as total_price_USD,
+	 f.square_meter_price_USD as square_meter_price_USD, ph.total_square_meters, ph.rooms_count as rooms_count,
+     yb.years_of_building asyears_of_building,f.E_oselya as E_oselya,f.credit as credit, ph.repair as repair
+	     from financial_information f
+	        join physical_characteristics ph
+				on ph.realty_id = f.realty_id
+	        join location l
+				on l.realty_id = f.realty_id
+            left join admin_district adn
+				on adn.admin_district_ID = l.admin_district_ID
+	        left join realty_type rt
+                on f.realty_type_ID = rt.realty_type_ID
+	        left join years_of_building yb
+                on yb.years_building_ID = ph.years_building_ID
+	 where f.original_or_copy = 'original' and l.city_id = 11
+```
+Також створюємо view в якому будуть вказані кількість переглядів, додавань, дата створення, та створемо стовпець , який буде характеризувати зацікавленість користувачів, коєфіцієнт зацікавленості. Ми отримуємо його поділивши кількість додавань на перегляди та помноживши на 100. Також враховуємо дату сворення об'яви, адже більш свіжі об'яви мають трохи інші показники в порівнянні зі сталими. Виділяємо 3 категорії "low" , "normal", "hight". Цей коефіцієнт є суб'єктивним, заснований на моєму власному досвіді, який варто доопрацьовувати, але він виконає основну задачу - відсіє "холодні" оголошення, які взагалі не цікаві користувачам. Завантажуємо данні з наших view у PowerBi, встановлюємо зв'язки та отримуємо наступний дашборд.
 
 
-
- 
 
 
 
