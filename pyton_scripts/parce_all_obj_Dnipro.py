@@ -4,7 +4,7 @@ import requests
 import json
 
 
-API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmtnjhsQrVXgf"  #задаем параметры
+API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmthsQrVXgf"  #задаем параметры
 BASE_URL = "https://developers.ria.com/dom/info/"
 list_ID_file = "All_ID_Dnipro"
 save_folder = "All_apartment_Dnipro"
