@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmtnjhsQrVXgf"
+API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmthsQrVXgf"
 URL = "https://developers.ria.com/dom/search"
 
 params = {
@@ -26,7 +26,7 @@ else:
     exit()
 
 for page in range(1,total_pages):
-    API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmtnjhsQrVXgf"
+    API_KEY = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmthsQrVXgf"
     URL = "https://developers.ria.com/dom/search"
 
     params = {
