@@ -80,7 +80,7 @@ def collection_all_cities_data(api_key,city_ids,squares,pause,start_date,end_dat
         print(f"закончено обработку для города {city_id}")
 
 
-api_key = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmtnjhsQrVXgf"
+api_key = "tBpXw0JFJHFL5gbyB0h1WP6ax6ZpmthsQrVXgf"
 city_ids = [7,8,9,10,12,14,15,16,18,19,20,22,23,24,25]
 start_date = datetime(2017,6,1)
 end_date = datetime(2025,3,1)
